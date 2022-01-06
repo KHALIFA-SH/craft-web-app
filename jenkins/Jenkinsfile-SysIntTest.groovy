@@ -18,19 +18,19 @@ pipeline {
   stages {
     stage('Run SysIntTest Suite') {
       steps {
-        script {
-          currentBuild.displayName = "${DEPLOY_ENV}/${SERVICE_NAME}:${SERVICE_VERSION}".toLowerCase()
-          withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: "${AWS_CREDENTIALS}"]]) {
-            dir("./soap-ui") {
-              sh '''
-                # set -x
-                env
-                ls -al
-                testrunner.sh -s"Mock Service Test Suite" -r -a MIPR-Mock-Service-soapui-project.xml
-              '''
-            }
-          }
-        }
+//         script {
+//           currentBuild.displayName = "${DEPLOY_ENV}/${SERVICE_NAME}:${SERVICE_VERSION}".toLowerCase()
+//           withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: "${AWS_CREDENTIALS}"]]) {
+//             dir("./soap-ui") {
+//               sh '''
+//                 # set -x
+//                 env
+//                 ls -al
+//                 testrunner.sh -s"Mock Service Test Suite" -r -a MIPR-Mock-Service-soapui-project.xml
+//               '''
+//             }
+//           }
+//         }
       }
     }
   }
