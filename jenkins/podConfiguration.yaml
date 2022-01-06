@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Pod
+spec:
+  containers:  # list of containers needed for building the service
+  - name: jnlp
+    image: jenkins/inbound-agent:4.6-1
+  # - name: java11
+  #   image: registry.redhat.io/openjdk/openjdk-11-rhel7:1.1    
+  #   command: ["tail", "-f", "/dev/null"]
+  #   imagePullPolicy: Always
+  #   securityContext:
+  #     runAsNonRoot: true
+  #     runAsUser: 1000
+  - name: soapui
+    image: ddavison/soapui  
+    command: ["tail", "-f", "/dev/null"]
+    imagePullPolicy: Always
+  #  securityContext:
+  #    runAsNonRoot: true
+  #    runAsUser: 1000
+  # - name: podman
+  #   image: registry.redhat.io/rhel8/podman
+  #   command: ["tail", "-f", "/dev/null"]
+  #   imagePullPolicy: Always
+  #   securityContext:
+  #     privileged: true
+  #     runAsUser: 0
+  #   tty: true
+  # - name: docker
+  #   image: docker:dind
+  #   command: ["tail", "-f", "/dev/null"]
+  #   imagePullPolicy: Always
+  #   volumeMounts:
+  #     - name: docker
+  #       mountPath: /var/run/docker.sock # Host docker engine for building
+  #   securityContext:
+  #     allowPrivilegeEscalation: true
+  #     privileged: true
+  #     runAsUser: 0
+  - name: aws-cli
+    image: bitnami/aws-cli    
+    command: ["tail", "-f", "/dev/null"]
+    imagePullPolicy: Always
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 1000
+  volumes:
+  - name: docker
+    hostPath:
+      path: /var/run/docker.sock
+  imagePullSecrets:
+  - name: redhat-registry-io-pullcreds
+  - name: dockerhub-registry-io-pullcreds
