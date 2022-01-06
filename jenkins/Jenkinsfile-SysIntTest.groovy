@@ -1,10 +1,10 @@
 pipeline {
   agent {
-    kubernetes {
-      idleMinutes 5  // how long the pod will live after no jobs have run on it
-      yamlFile './jenkins/podConfiguration.yaml'
-      defaultContainer 'soapui'
-    }
+//     kubernetes {
+//       idleMinutes 5  // how long the pod will live after no jobs have run on it
+//       yamlFile './jenkins/podConfiguration.yaml'
+//       defaultContainer 'soapui'
+//     }
   }
   environment {
     SERVICE_NAME = "mipr-funds-api-proxy"
